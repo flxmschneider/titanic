@@ -26,17 +26,35 @@ param_grid = {
     'min_samples_split': [7, 8, 9],
     'n_estimators': [190, 200, 210]
 }
+grid_search = False
 
-model = RandomForestClassifier()
-grid_search = GridSearchCV(estimator = model, param_grid = param_grid,
-                          cv = 3, n_jobs = -1, verbose = 2)
-grid_search.fit(X_train, y_train)
+if grid_search == True:
+    model = RandomForestClassifier()
+    grid_search = GridSearchCV(estimator = model, param_grid = param_grid,
+                              cv = 3, n_jobs = -1, verbose = 2)
+    grid_search.fit(X_train, y_train)
+    
+    best_grid = grid_search.best_estimator_
+    best_grid.fit(X_train,y_train)
+    pred = best_grid.predict(X_test)
+    acc = accuracy_score(y_test, pred)
+    print('Accuracy score: ',acc)
+    filename= '../models/gridsearch_RandomForest_'+str(pd.Timestamp.now())[:16]+'_'+str(acc)+'.sav'
+    pickle.dump(best_grid, open(filename, 'wb'))
 
-best_grid = grid_search.best_estimator_
-best_grid.fit(X_train,y_train)
-pred = best_grid.predict(X_test)
-acc = accuracy_score(y_test, pred)
-print('Accuracy score: ',acc)
-
-filename = '../models/gridsearch_RandomForest_'+str(pd.Timestamp.now())[:16]+'_'+str(acc)+'.sav'
-pickle.dump(best_grid, open(filename, 'wb'))
+else:
+    model = RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
+                max_depth=75, max_features=2, max_leaf_nodes=None,
+                min_impurity_decrease=0.0, min_impurity_split=None,
+                min_samples_leaf=4, min_samples_split=7,
+                min_weight_fraction_leaf=0.0, n_estimators=210, n_jobs=-1,
+                oob_score=False, random_state=None, verbose=0,
+                warm_start=False)
+    model.fit(X_train,y_train)
+    pred = model.predict(X_test)
+    acc = accuracy_score(y_test, pred)
+    print('Accuracy: {}'.format(acc))
+    filename= '../models/gridsearch_RandomForest_'+str(pd.Timestamp.now())[:16]+'_'+str(acc)+'.sav'
+    model.fit(X, y)
+    pickle.dump(model, open(filename, 'wb'))  
+    

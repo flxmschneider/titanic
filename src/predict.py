@@ -2,7 +2,7 @@ import pickle
 import pandas as pd
 from transformation import transform_data
 
-filename = '../models/gridsearch_RandomForest_2019-01-13 14:16_<function accuracy_score at 0x7f95b1c580d0>.sav'
+filename = '../models/gridsearch_RandomForest_2019-01-13 19:11_0.8197424892703863.sav'
 best_grid = pickle.load(file=open(filename, 'rb'))
 
 test_set = pd.read_csv('../data/test.csv')
