@@ -43,18 +43,19 @@ if grid_search == True:
     pickle.dump(best_grid, open(filename, 'wb'))
 
 else:
-    model = RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
-                max_depth=75, max_features=2, max_leaf_nodes=None,
-                min_impurity_decrease=0.0, min_impurity_split=None,
-                min_samples_leaf=4, min_samples_split=7,
-                min_weight_fraction_leaf=0.0, n_estimators=210, n_jobs=-1,
-                oob_score=False, random_state=None, verbose=0,
-                warm_start=False)
+    model = RandomForestClassifier(bootstrap=True, class_weight=None, #criterion='gini',
+            max_depth=75, max_features=0.5, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=3, min_samples_split=7,
+            min_weight_fraction_leaf=0.0, n_estimators=180, n_jobs=1,
+            oob_score=False, random_state=None, verbose=0,
+            warm_start=False)
     model.fit(X_train,y_train)
+    
     pred = model.predict(X_test)
     acc = accuracy_score(y_test, pred)
     print('Accuracy: {}'.format(acc))
-    filename= '../models/gridsearch_RandomForest_'+str(pd.Timestamp.now())[:16]+'_'+str(acc)+'.sav'
+    filename= '../models/gridsearch_RandomForest_1.sav'#+str(pd.Timestamp.now())[:16]+'_'+str(acc)+'.sav'
     model.fit(X, y)
     pickle.dump(model, open(filename, 'wb'))  
     
