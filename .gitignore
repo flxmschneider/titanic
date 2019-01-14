@@ -1,2 +1,17 @@
 notebooks
 submission.csv
+.idea/modules.xml 
+.idea/encodings.xml
+.idea/misc.xml
+.idea/titanic.iml
+.idea/vcs.xml
+.idea/workspace.xml
+src/predict.py
+models/gridsearch_RandomForest_2019-01-13 19:00.sav
+models/gridsearch_RandomForest.sav
+models/gridsearch_RandomForest_2019-01-13 19:07.sav
+models/gridsearch_RandomForest_2019-01-13 19:09.sav
+models/gridsearch_RandomForest_2019-01-13 19:11_0.8197424892703863.sav
+src/.transformation.py.swo
+models/gridsearch_RandomForest.sav
+src/.vscode/settings.json

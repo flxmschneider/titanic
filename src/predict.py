@@ -17,4 +17,4 @@ f.write('PassengerId,Survived \n')
 for p, r in zip(pass_id, res):
     f.write(str(p)+','+str(r)+'\n')
 f.close()
-print('Prediction written to '+str(filename)) 
+print('Prediction written to '+str(filename))
